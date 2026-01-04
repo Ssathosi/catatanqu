@@ -53,18 +53,20 @@ def main():
     application = ApplicationBuilder().token(config.TELEGRAM_BOT_TOKEN).build()
     setup_handlers(application)
     
-    # Check if running in production (Koyeb, Render, etc)
+    # Check if running in production (Koyeb sets KOYEB_PUBLIC_DOMAIN)
+    KOYEB_DOMAIN = os.environ.get("KOYEB_PUBLIC_DOMAIN")
     PORT = int(os.environ.get("PORT", 8000))
-    WEBHOOK_URL = os.environ.get("KOYEB_PUBLIC_DOMAIN") or os.environ.get("RENDER_EXTERNAL_URL")
     
-    if WEBHOOK_URL:
+    if KOYEB_DOMAIN:
         # Production: Use webhook
-        logger.info(f"Starting webhook on port {PORT}...")
+        logger.info(f"Starting webhook mode on port {PORT}...")
+        logger.info(f"Domain: {KOYEB_DOMAIN}")
+        
         application.run_webhook(
             listen="0.0.0.0",
             port=PORT,
-            url_path=config.TELEGRAM_BOT_TOKEN,
-            webhook_url=f"https://{WEBHOOK_URL}/{config.TELEGRAM_BOT_TOKEN}"
+            secret_token="catatanqu-webhook-secret",
+            webhook_url=f"https://{KOYEB_DOMAIN}/"
         )
     else:
         # Local development: Use polling
