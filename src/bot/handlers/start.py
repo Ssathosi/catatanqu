@@ -145,7 +145,11 @@ def get_start_handler() -> ConversationHandler:
             CONFIRM_PIN: [MessageHandler(filters.TEXT & ~filters.COMMAND, confirm_pin)],
             VERIFY_LOGIN: [MessageHandler(filters.TEXT & ~filters.COMMAND, verify_login)],
         },
-        fallbacks=[CommandHandler("cancel", cancel)],
+        fallbacks=[
+            CommandHandler("start", start_command),
+            CommandHandler("cancel", cancel),
+        ],
+        allow_reentry=True,
         per_user=True,
         per_chat=True,
     )
