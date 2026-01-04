@@ -301,6 +301,9 @@ Ketik /dompet untuk menambah akun e-wallet atau bank.
 💡 Atau langsung ketik seperti biasa:
 "Makan siang 25rb"
 "Ngopi 15k"
+
+─────────────────
+📱 *CatatanQu by Sssathosi*
 """,
 }
 

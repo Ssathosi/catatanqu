@@ -34,7 +34,7 @@ class Config:
     # App Settings
     DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
-    BOT_NAME: str = os.getenv("BOT_NAME", "Bot Catatan Keuangan")
+    BOT_NAME: str = os.getenv("BOT_NAME", "CatatanQu by Sssathosi")
     
     # Security Settings
     PIN_MIN_LENGTH: int = int(os.getenv("PIN_MIN_LENGTH", "4"))
